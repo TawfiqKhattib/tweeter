@@ -21,6 +21,8 @@ const Tweeter = function() {
 
     let _postIdCounter = 2;
     let _commentIdCounter = 6;
+    const rend = Renderer()
+    rend.renderPosts(_posts);
 
     const getPosts = function() {
         return _posts;
@@ -30,21 +32,25 @@ const Tweeter = function() {
         const id = "p" + (_postIdCounter + 1);
         _posts.push({ text: text, id: id, comments: [] });
         _postIdCounter += 1;
+        rend.renderPosts(_posts);
     }
 
     const removePost = function(postId) {
         _posts.splice(postId - 1, 1);
         _postIdCounter -= 1;
+        rend.renderPosts(_posts);
     }
     const addComment = function(postId, text) {
-        const nextComm = (_commentIdCounter + 1);
+        const nextComm = "c" + (_commentIdCounter + 1);
         _posts[postId - 1].comments.push({ id: nextComm, text: text });
         _commentIdCounter += 1;
+        rend.renderPosts(_posts);
     }
 
     const removeComment = function(postID, commentID) {
         _posts[postID - 1].comments.splice(commentID - 1, 1);
         _commentIdCounter -= 1;
+        rend.renderPosts(_posts);
     }
     return {
         getPosts: getPosts,
@@ -55,7 +61,7 @@ const Tweeter = function() {
     }
 }
 
-const myTweeter = Tweeter();
+
 // console.log(myTweeter.getPosts()[1].comments[3]);
 // myTweeter.addComment(2, "the last comment");
 // console.log(myTweeter.getPosts()[1].comments[3]);

@@ -28,16 +28,35 @@ const Tweeter = function() {
         return _posts;
     }
 
+    const indexNotExist = function(counter, postOrComm) {
+        cnt = 0;
+        for (let i = 1; i <= counter; i++) {
+            for (let index in postOrComm) {
+                if (parseInt(postOrComm[index].id[1]) !== i) {
+                    cnt += 1;
+                }
+            }
+            if (cnt === counter) {
+                return (i - 1);
+            }
+            cnt = 0;
+        }
+        return counter;
+    }
     const addPost = function(text) {
-        const id = "p" + (_postIdCounter + 1);
+        const id = "p" + (indexNotExist(_postIdCounter, _posts) + 1);
         _posts.push({ text: text, id: id, comments: [] });
         _postIdCounter += 1;
         rend.renderPosts(_posts);
     }
 
     const removePost = function(postId) {
-        _posts.splice(postId - 1, 1);
-        _postIdCounter -= 1;
+        for (let index in _posts) {
+            if (parseInt(_posts[index].id[1]) === postId) {
+                _posts.splice(index, 1);
+                _postIdCounter -= 1;
+            }
+        }
         rend.renderPosts(_posts);
     }
     const addComment = function(postId, text) {
@@ -48,8 +67,12 @@ const Tweeter = function() {
     }
 
     const removeComment = function(postID, commentID) {
-        _posts[postID - 1].comments.splice(commentID - 1, 1);
-        _commentIdCounter -= 1;
+        for (let index in _posts[postID - 1].comments) {
+            if (parseInt(_posts[postID - 1].comments[index].id[1]) === commentID) {
+                _posts[postID - 1].comments.splice(index, 1);
+                _commentIdCounter -= 1;
+            }
+        }
         rend.renderPosts(_posts);
     }
     return {

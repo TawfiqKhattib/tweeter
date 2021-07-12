@@ -9,7 +9,8 @@ body {
     padding-left: 25px;
     padding-right: 25px;
     grid-template-columns: 3fr 1fr;
-    grid-template-areas: "h .""i b""p p"
+    grid-template-areas: "h .""i b""p p";
+    background: #00acee;
 }
 
 #header {
@@ -72,4 +73,19 @@ body {
 .delete-comment {
     cursor: pointer;
     color: #e74c3c;
+}
+
+.item {
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    border-color: rgb(207, 153, 153) rgb(173, 125, 125) rgb(117, 85, 85);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 10px 5px;
+    padding: 0 16px 16px 16px;
+    max-width: 468px;
 }
